@@ -1,6 +1,8 @@
 html, body {
   margin: 0;
   padding: 0;
+  font-family: monospace;
+  font-size: 15px;
 }
 canvas {
   display: block;
@@ -10,17 +12,20 @@ canvas {
 }
 
 .dropdown {
-  position: relative;
+  position: fixed;
   display: inline-block;
+  z-index: 1;
+
 }
 
 .dropbutton {
   background-color: #909090;
   color: black;
   padding: 16px;
-  font-size: 16px;
+  
   border: none;
-  z-index: -1;
+  font-family: monospace;
+  font-size: 15px;
 }
 
 .dropdown-content{
@@ -46,5 +51,5 @@ canvas {
 }
 
 .dropdown:hover .dropbutton {
-  background-color: #3e8e41;
+  background-color: #f1f1f1;
 }

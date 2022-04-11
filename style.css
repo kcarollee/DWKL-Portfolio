@@ -1,23 +1,28 @@
 html, body {
   margin: 0;
   padding: 0;
+  font-family: monospace;
+  font-size:15px
 }
 canvas {
   display: block;
 }
 
 .dropdown {
-  position: relative;
+  position: fixed;
   display: inline-block;
   z-index: 1;
+
 }
 
 .dropbutton {
   background-color: #909090;
   color: black;
   padding: 16px;
-  font-size: 16px;
+  
   border: none;
+  font-family: monospace;
+  font-size: 15px;
 }
 
 .dropdown-content{
@@ -51,4 +56,9 @@ canvas {
   margin-left: auto;
   margin-right: auto;
   width: 25%
+}
+
+.zoom:hover {
+  transition: transform .2s;
+  transform: scale(1.2);
 }

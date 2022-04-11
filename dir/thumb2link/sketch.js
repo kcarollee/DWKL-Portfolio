@@ -44,8 +44,10 @@ PicTile.posCopyArray = [];
 let img;
 let picTileArray = [];
 
-let picTileWidth = 25;
-let picTileHeight = 25;
+
+
+let picTileWidth = 50;
+let picTileHeight = 50;
 let picTileWidthNum, picTileHeightNum;
 function preload(){
   img = loadImage('assets/images/pic.jpg');
@@ -66,6 +68,8 @@ function setup() {
       picTileArray.push(tile);
     }
   }
+
+  
 }
 
 function draw() {
