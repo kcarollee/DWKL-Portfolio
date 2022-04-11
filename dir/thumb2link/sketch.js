@@ -89,9 +89,10 @@ function draw() {
     p.display(imgr);
   })
   fill(255);
-  text("CLICK AND DRAG MOUSE TO SELECT TILES TO SHUFFLE", 10, 20);
-  text("PRESS 's' TO SHUFFLE SELECTED TILES", 10, 40);
-  text("PRESS 'r' TO RESET ARRAY OF TILES TO SHUFFLE", 10, 60);
+  
+  text("PRESS 's' TO SHUFFLE SELECTED TILES", 10, 20);
+  text("PRESS 'r' TO RESET ARRAY OF TILES TO SHUFFLE", 10, 40);
+  text("PRESS 'x' TO RESET EVERYTHING", 10, 60);
 }
 
 function keyPressed(){
@@ -116,7 +117,7 @@ function keyPressed(){
       PicTile.posCopyArray = [];
       break;
 
-    case 'q':
+    case 'x':
       picTileArray.forEach(function(p){
         p.showGrid = false;
         p.selected = false;
