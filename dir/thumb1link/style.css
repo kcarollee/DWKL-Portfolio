@@ -4,12 +4,13 @@ html, body {
 }
 canvas {
   display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .dropdown {
   position: relative;
   display: inline-block;
-  z-index: 1;
 }
 
 .dropbutton {
@@ -43,12 +44,5 @@ canvas {
 }
 
 .dropdown:hover .dropbutton {
-  background-color: #f1f1f1;
-}
-
-.center-image {
-  display:block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 25%
+  background-color: #3e8e41;
 }
