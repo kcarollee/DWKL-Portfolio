@@ -1,4 +1,4 @@
-let MAX_TRIGSUM_NUM = 4;
+let MAX_TRIGSUM_NUM = 6;
 let canvas;
 class TrigSum{
   constructor(posx, posy){

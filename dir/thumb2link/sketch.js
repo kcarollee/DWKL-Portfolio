@@ -1,5 +1,7 @@
 class PicTile{
   constructor(posx, posy, w, h){
+    this.initPosx = posx;
+    this.initPosy = posy;
     this.posx = posx;
     this.posy = posy;
     this.imgPosx = this.posx;
@@ -26,6 +28,10 @@ class PicTile{
     }
   }
   
+  reset(){
+    this.imgPosx = this.initPosx;
+    this.imgPosy = this.initPosy;
+  }
 
   
   mouseIn(){
@@ -98,12 +104,24 @@ function keyPressed(){
         p.changePos(pos[0], pos[1]);
         p.setImage(img);
         p.showGrid = false;
+        p.selected = false;
       })
       break;
     case 'r':
       PicTile.shuffleArray.forEach(function(p){
         p.showGrid = false;
         p.selected = false;
+      });
+      PicTile.shuffleArray = [];
+      PicTile.posCopyArray = [];
+      break;
+
+    case 'q':
+      picTileArray.forEach(function(p){
+        p.showGrid = false;
+        p.selected = false;
+        p.reset();
+        p.setImage(img);
       });
       PicTile.shuffleArray = [];
       PicTile.posCopyArray = [];
