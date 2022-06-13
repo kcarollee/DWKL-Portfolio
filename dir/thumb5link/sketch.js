@@ -18,11 +18,16 @@ let rotationalFrameArr1 = [];
 let rotationalFrameArr2 = [];
 let rotationalFrameArr3 = [];
 let rotationalFrameArr4 = [];
+let rotationalFrameArr5 = [];
 
 let provokedFrameArr1 = [];
 let provokedFrameArr2 = [];
 let provokedFrameArr3 = [];
 let provokedFrameArr4 = []; // RED EYE
+let provokedFrameArr5 = [];
+let provokedFrameArr6 = [];
+let provokedFrameArr7 = []; // EYE ONE
+
 
 let groupArr = []; // mainly used to determine correct mouse clicks
 
@@ -89,7 +94,7 @@ let melodyNoteGroup5 = [
 
 
 let counterImage = 0;
-let totalImages = 740;
+let totalImages = 1025;
 let imagesLoaded = false;
 
 function loadImageElement(filename, imageArr, index) {
@@ -137,6 +142,11 @@ function loadImages(){
     //rotationalFrameArr4.push(temp);
   }
 
+  for (let i = 0; i < 55; i++){
+    let temp = loadImageElement('assets/vidSourceTest/rotationalSources/rs5/rs (' + (i + 1) + ').jpg', rotationalFrameArr5, i); 
+    //rotationalFrameArr4.push(temp);
+  }
+
   
   // PROVOKED FRAMES
   for (let i = 0; i < 90; i++){
@@ -158,6 +168,21 @@ function loadImages(){
     let temp = loadImageElement('assets/vidSourceTest/provokedSources/eye2/ps (' + (1 + i) + ').jpg', provokedFrameArr4, i);
     //provokedFrameArr4.push(temp);
   }
+
+  for (let i = 0; i < 70; i++){
+    let temp = loadImageElement('assets/vidSourceTest/provokedSources/ps4/ps (' + (1 + i) + ').jpg', provokedFrameArr5, i);
+    //provokedFrameArr4.push(temp);
+  }
+
+  for (let i = 0; i < 100; i++){
+    let temp = loadImageElement('assets/vidSourceTest/provokedSources/ps5/ps (' + (1 + i) + ').jpg', provokedFrameArr6, i);
+    //provokedFrameArr4.push(temp);
+  }
+
+  for (let i = 0; i < 60; i++){
+    let temp = loadImageElement('assets/vidSourceTest/provokedSources/eye1/ps (' + (1 + i) + ').jpg', provokedFrameArr7, i);
+    //provokedFrameArr4.push(temp);
+  }
 }
 
 let frameGroupsCreated = false;
@@ -168,19 +193,19 @@ function createFrameGroups(){
   let BGSizeh = min(height, width) * 0.5;
   let BGStartingPos = getStartingPos(BGRowNum, BGColNum, BGSizew, BGSizeh, windowWidth * 0.5, windowHeight * 0.5);
   bgTileGroup = new FrameTileGroup(BGRowNum, BGColNum, BGSizew, BGSizeh,
-     BGStartingPos[0], BGStartingPos[1], rotationalFrameArr4, provokedFrameArr4, 0);
+     BGStartingPos[0], BGStartingPos[1], rotationalFrameArr4, provokedFrameArr4, provokedFrameArr4, 0);
 
   bgTileGroup.setNoteArrays(bassNoteGroup1, melodyNoteGroup1);
 
   
 
   let CGRowNum1 = 10;
-  let CGColNum1 = 5;
+  let CGColNum1 = 4;
   let CGSizew1 = 100;
   let CGSizeh1  = 100;
   let CGStartingPos1 = getStartingPos(CGRowNum1, CGColNum1, CGSizew1, CGSizeh1, windowWidth * 0.5, windowHeight * 0.5);
   testTileGroup1 = new FrameTileGroup(CGRowNum1, CGColNum1, CGSizew1, CGSizeh1, 
-    CGStartingPos1[0], CGStartingPos1[1], rotationalFrameArr2, provokedFrameArr2, 0);
+    CGStartingPos1[0], CGStartingPos1[1], rotationalFrameArr2, provokedFrameArr2, provokedFrameArr5, 0);
 
   testTileGroup1.setNoteArrays(bassNoteGroup2, melodyNoteGroup2);
 
@@ -190,17 +215,17 @@ function createFrameGroups(){
   let HGSizeh = 50;
   let HGStartingPos = getStartingPos(HGRowNum, HGColNum, HGSizew, HGSizeh, windowWidth * 0.5, windowHeight * 0.75);
   horiTileGroup1 = new FrameTileGroup(HGRowNum, HGColNum, HGSizew, HGSizeh,
-     HGStartingPos[0], HGStartingPos[1], rotationalFrameArr3, provokedFrameArr3, 0);
+     HGStartingPos[0], HGStartingPos[1], rotationalFrameArr3, provokedFrameArr3, provokedFrameArr3, 0);
 
   horiTileGroup1.setNoteArrays(bassNoteGroup3, melodyNoteGroup3);
 
   let CGRowNum = 20;
-  let CGColNum = 4;
+  let CGColNum = 5;
   let CGSizew = 100;
   let CGSizeh = 100;
   let CGStartingPos = getStartingPos(CGRowNum, CGColNum, CGSizew, CGSizeh, windowWidth * 0.5, windowHeight * 0.55);
   testTileGroup = new FrameTileGroup(CGRowNum, CGColNum, CGSizew, CGSizeh, 
-    CGStartingPos[0], CGStartingPos[1], rotationalFrameArr1, provokedFrameArr1, 0);
+    CGStartingPos[0], CGStartingPos[1], rotationalFrameArr1, provokedFrameArr1, provokedFrameArr6, 0);
 
   testTileGroup.setNoteArrays(bassNoteGroup4, melodyNoteGroup4);
 
@@ -210,7 +235,7 @@ function createFrameGroups(){
   let VGSizeh = 50;
   let VGStartingPos = getStartingPos(VGRowNum, VGColNum, VGSizew, VGSizeh, windowWidth * 0.5, windowHeight * 0.25);
   horiTileGroup2 = new FrameTileGroup(VGRowNum, VGColNum, VGSizew, VGSizeh,
-     VGStartingPos[0], VGStartingPos[1], rotationalFrameArr2, provokedFrameArr2, 0);
+     VGStartingPos[0], VGStartingPos[1], rotationalFrameArr3, provokedFrameArr7, provokedFrameArr7, 0);
 
   horiTileGroup2.setNoteArrays(bassNoteGroup5, melodyNoteGroup5);
   groupArr.push(bgTileGroup, testTileGroup1, horiTileGroup1, testTileGroup, horiTileGroup2);
@@ -276,9 +301,9 @@ function windowResized(){
     testTileGroup.repositionFrames(windowWidth * 0.5, windowHeight * 0.5);
     
     
-    horiTileGroup1.repositionFrames(windowWidth * 0.5, windowHeight * 0.25);
+    horiTileGroup1.repositionFrames(windowWidth * 0.5, windowHeight * 0.75);
 
-    horiTileGroup2.repositionFrames(windowWidth * 0.5, windowHeight * 0.75);
+    horiTileGroup2.repositionFrames(windowWidth * 0.5, windowHeight * 0.25);
     bgTileGroup.repositionFrames(windowWidth * 0.5, windowHeight * 0.5);
   }
 }

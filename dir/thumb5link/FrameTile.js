@@ -153,7 +153,7 @@ class FrameTile{
         if (this.provoked){
           this.sizeFactor = 1.0 + 0.25 * sin(this.provokedCount);
           let spreadFactor = int(map(spreadSpeed, 0.2, 0.7, 30, 60));
-          console.log(spreadFactor);
+          //console.log(spreadFactor);
           this.provokedCount += PI / spreadFactor;
           if (this.provokedCount > PI / 8 && !this.provokeFlag){
             for (let i = 0; i < this.neighboringTilesArr.length; i++){
@@ -195,7 +195,7 @@ class FrameTile{
       else {
         let provokedFrameIndex = int(map(this.provokedCount, 0, PI, 0, this.provokedFrameSource.length - 1));
         provokedFrameIndex = constrain(provokedFrameIndex, 0, this.provokedFrameSource.length - 1);
-        console.log(provokedFrameIndex);
+        //console.log(provokedFrameIndex);
         image(this.provokedFrameSource[provokedFrameIndex], this.posVec.x, this.posVec.y, 
           this.sizex * 0.95 * this.sizeFactor, this.sizey * 0.95 * this.sizeFactor);
         }

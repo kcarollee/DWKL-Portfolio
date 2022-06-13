@@ -1,7 +1,7 @@
 
 
 class FrameTileGroup{
-    constructor(rowNum, colNum, sizew, sizeh, startingPosx, startingPosy, frameSource, provokedFrameSource, mode){
+    constructor(rowNum, colNum, sizew, sizeh, startingPosx, startingPosy, frameSource, provokedFrameSource, provokedFrameSource2, mode){
       this.rowNum = rowNum;
       this.colNum = colNum;
       this.sizew = sizew;
@@ -12,6 +12,7 @@ class FrameTileGroup{
       this.frameTileArr = [];
       this.frameSource = frameSource;
       this.provokedFrameSource = provokedFrameSource;
+      this.provokedFrameSource2 = provokedFrameSource2;
   
       this.movementMode = mode;
 
@@ -82,6 +83,12 @@ class FrameTileGroup{
       });
 
     }
+
+    resetProvokedFrames(newFrameSource){
+      this.frameTileArr.forEach(function(tile){
+        tile.setProvokedFrameSource(newFrameSource);
+      });
+    }
   
     mouseClickReactive(){
       
@@ -96,6 +103,17 @@ class FrameTileGroup{
               }
 
               // melody notes
+              
+              switch(this.melodyOscillator.getType()){
+                case 'sine':
+                  this.melodyOscillator.setType('triangle');
+                  this.resetProvokedFrames(this.provokedFrameSource);
+                  break;
+                case 'triangle':
+                  this.melodyOscillator.setType('sine');
+                  this.resetProvokedFrames(this.provokedFrameSource2);
+                  break;
+              }
               this.melodyNoteIndex = int(random(0, this.melodyNotesArr.length));
               this.melodyFreq = this.melodyNotesArr[this.melodyNoteIndex];
               //console.log(this.melodyFreq, this.melodyNoteIndex);

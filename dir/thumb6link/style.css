@@ -8,21 +8,18 @@ canvas {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  z-index: 1;
 }
 
 .dropdown {
-  position: fixed;
+  position: relative;
   display: inline-block;
-  z-index: 1;
-
 }
 
 .dropbutton {
   background-color: #909090;
   color: black;
   padding: 16px;
-  
+  font-size: 16px;
   border: none;
   font-family: monospace;
   font-size: 15px;
