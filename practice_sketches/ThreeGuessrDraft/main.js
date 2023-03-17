@@ -32,11 +32,11 @@ function main(){
 	
 	renderer.render(currentScene, camera);
 
-	/*
+	
 	const orbitControls = new OrbitControls(camera, renderer.domElement);
     orbitControls.target.copy(currentScene.position);
     orbitControls.update();
-	*/
+	
 
 //MINIMAP & MINIMAP CAMERA
 	const minimapCamera = new THREE.OrthographicCamera( -5, 5, 5, -5, 1, 1000);
