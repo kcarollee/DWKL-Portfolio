@@ -77,7 +77,7 @@ function main(){
 			this.materialArr = [];	
 			*/
 			// TEMPORARY CITY MODELING
-			this.buildingNum = 200;
+			this.buildingNum = 10000;
 			this.cityRadius = 5;
 			this.meshGroup = new THREE.Group();
 			this.meshMaterial = new THREE.MeshNormalMaterial(); // TEMP MATERIAL
