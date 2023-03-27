@@ -1,14 +1,14 @@
 import * as THREE from 'three';
-import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
-
+import WFCFloorMesh from './WFCFloorMesh.js';
 
 function main(){
 	const canvas = document.querySelector('#c');
 	const renderer = new THREE.WebGLRenderer({canvas, antialias: true});
 
-//CAMERA
+// CAMERA
 	const fov = 75;
 	const aspect = 2; // display aspect of the canvas
 	const near = 0.1;
@@ -16,7 +16,7 @@ function main(){
 	const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 	camera.position.set(0, 0, 10);
 
-//SCENES AND GAME MODES
+// SCENES AND GAME MODES
 	let currentScene;
 	let gameMode = "TITLE_SCREEN"; // TITLE_SCREEN, STAGE_SELECT, MAIN_GAME
 	const titleScene = new THREE.Scene();
@@ -36,9 +36,8 @@ function main(){
 	const orbitControls = new OrbitControls(camera, renderer.domElement);
     orbitControls.target.copy(currentScene.position);
     orbitControls.update();
-	
 
-//MINIMAP & MINIMAP CAMERA
+// MINIMAP & MINIMAP CAMERA
 	const minimapCamera = new THREE.OrthographicCamera( -5, 5, 5, -5, 1, 1000);
 	const minimapRenderTarget = new THREE.WebGLRenderTarget(window.innerWidth, window.innerHeight);
 	const minimapCameraLookAt = new THREE.Vector3(0, 0, 0);
@@ -65,9 +64,6 @@ function main(){
 	minimapMesh.position.set(5, -5);
 	mainGameScene.add(minimapMesh);
 
-
-
-
 // CITY MODEL
 	class StageModel {
 		constructor(){
@@ -77,26 +73,34 @@ function main(){
 			this.materialArr = [];	
 			*/
 			// TEMPORARY CITY MODELING
-			this.buildingNum = 1000;
-			this.cityRadius = 5;
+			this.buildingNum = 200;
 			this.meshGroup = new THREE.Group();
 			this.meshMaterial = new THREE.MeshNormalMaterial(); // TEMP MATERIAL
 			for (let i = 0; i < this.buildingNum; i++){
 				// buildings will be spread across the XZ axis
 				// the Y axis determines the height of the building. if height = h yPos = h * 0.5
-				let width = Math.random();
-				let depth = Math.random();
-				let height = Math.random();
+				let width = Math.random() + .2;
+				let depth = Math.random() + .2;
+				let height = Math.random() + .2;
+				let radius = Math.random();
+		        this.cityRadius = 5 * Math.random();
 
-				let posx = this.cityRadius * Math.cos(Math.random() * Math.PI * 2.0);
-				let posz = this.cityRadius * Math.sin(Math.random() * Math.PI * 2.0);
-				let posy = height * 0.5;
+				let posx = this.cityRadius * Math.cos(radius * Math.PI * 2.0);
+				let posz = this.cityRadius * Math.sin(radius * Math.PI * 2.0);
+				let posy = height * 0.5 + 0.01;
 
 				let buildingGeom =  new THREE.BoxGeometry(width, height, depth);
 				let buildingMesh = new THREE.Mesh(buildingGeom, this.meshMaterial);
 				buildingMesh.position.set(posx, posy, posz);
 				this.meshGroup.add(buildingMesh);
 			}
+
+			this.stageRoadMesh = new WFCFloorMesh(20, 0.5, 0.5, 'assets/tiles/crosswalk/', '.png');
+			this.stageRoadMesh.waveFunctionCollapseFullCycle();
+			this.stageRoadMesh.buildMesh();
+
+			this.meshGroup.add(this.stageRoadMesh.getMeshGroup())
+		
 
 
 			this.stageState = {
@@ -106,10 +110,9 @@ function main(){
 			}
 		}
 		
-
-
 		addToScene(scene){
 			this.meshGroup.renderOrder = 0;
+			//this.stageRoadMesh.addToScene(scene);
 			scene.add(this.meshGroup);
 		}
 	}
@@ -164,7 +167,7 @@ function main(){
 	const pointer = new THREE.Vector2();
 	const fontLoader = new FontLoader();
 	fontLoader.load('assets/fonts/font_1.json', function(font){
-		const titleGeometry = new TextGeometry('THREEGUESSR', {
+		const titleGeometry = new TextGeometry('PROJECT MIA', {
 			font: font,
 			size: 0.5,
 			height: 0.25,
@@ -261,7 +264,7 @@ function main(){
 	function generateStage(){
 		const newStage = new StageModel();
 		newStage.addToScene(mainGameScene);
-		console.log(mainGameScene.children);
+		//console.log(mainGameScene.children);
 	}
 
 	function updateRaycaster(){
@@ -275,6 +278,7 @@ function main(){
 			console.log("HIT");
 		}
 		*/
+
 	}
 
 	
@@ -290,6 +294,9 @@ function main(){
 		}
 		return needResize;
 	}
+
+	
+	
 
 	window.addEventListener( 'pointermove', onPointerMove );
 	window.addEventListener('click', onPointerClick);
